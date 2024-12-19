@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    string name;
+    double salary;
+
+    Employee(const string& n, double s) : name(n), salary(s) {}
+    virtual double calculateBonus() const { 
+        return 0.1 * salary;
+    }
+    void printInfo() const {
+        cout << "Employee: " << name << ", Salary: " << salary << ", Bonus: " << calculateBonus() << endl;
+    }
+};
+
+class Manager : public Employee {
+public:
+    Manager(const string& n, double s) : Employee(n, s) {}
+
+    double calculateBonus() const override { 
+        return 0.15 * salary; 
+    }
+};
+
+class Salesperson : public Employee {
+public:
+    Salesperson(const string& n, double s) : Employee(n, s) {}
+
+    double calculateBonus() const override { 
+        return 0.2 * salary; 
+    }
+};
+
+int main() {
+    Employee* employees[3];
+    employees[0] = new Employee("John Doe", 50000);
+    employees[1] = new Manager("Jane Smith", 70000);
+    employees[2] = new Salesperson("David Lee", 60000);
+
+    for (int i = 0; i < 3; ++i) {
+        employees[i]->printInfo(); 
+    }
+
+    delete employees[0];
+    delete employees[1];
+    delete employees[2];
+
+    return 0;
+}
