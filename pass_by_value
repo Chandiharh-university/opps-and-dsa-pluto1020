@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+class MyClass {
+public:
+    int data;
+    MyClass(int d) : data(d) {}
+    void display() const {
+        cout << "Data: " << data << endl;
+    }
+};
+
+void passByValue(MyClass obj) {
+    static int count = 0;
+    cout << "Inside passByValue() - Call count: " << ++count << endl;
+    obj.display(); 
+}
+
+int main() {
+    MyClass obj1(10);
+    MyClass obj2(20);
+    passByValue(obj1); 
+    passByValue(obj2); 
+    return 0;
+}
