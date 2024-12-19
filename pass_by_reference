@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+void modifyByReference(int& ref) {
+  ref = ref * 2; 
+}
+
+int main() {
+  int num = 10; 
+  cout << "Before modification: " << num << endl;
+  modifyByReference(num); 
+  cout << "After modification: " << num << endl; 
+  return 0;
+}
