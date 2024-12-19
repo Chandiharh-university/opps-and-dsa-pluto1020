@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+double calculateSum(const string& input) {
+    double sum = 0;
+    istringstream iss(input);
+    double value;
+
+    while (iss >> value) {
+        sum += value;
+    }
+    return sum;
+}
+
+int main() {
+    string input;
+
+    cout << "Enter values (separated by spaces): ";
+    getline(cin, input);
+    double sum = calculateSum(input);
+    cout << "Sum: " << sum << endl;
+
+    return 0;
+}
