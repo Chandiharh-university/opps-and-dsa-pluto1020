@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <limits>
+
+using namespace std;
+
+void bubbleSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        bool swapped = false;
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+    }
+}
+
+vector<int> getUserInput() {
+    int numElements;
+
+    while (true) {
+        cout << "Enter the number of elements in the list: ";
+        cin >> numElements;
+
+        if (cin.fail() || numElements <= 0) {
+            cout << "Invalid input. Please enter a positive integer." << endl;
+            cin.clear(); // Clear error flags
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        break;
+    }
+
+    vector<int> userList;
+    for (int i = 0; i < numElements; i++) {
+        int element;
+        while (true) {
+            cout << "Enter element " << i + 1 << ": ";
+            cin >> element;
+            if (cin.fail()) {
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+            userList.push_back(element);
+            break;
+        }
+    }
+    return userList;
+}
+
+int main() {
+    vector<int> userArray = getUserInput();
+
+    cout << "Unsorted list: ";
+    for (int val : userArray) {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    bubbleSort(userArray);
+
+    cout << "Sorted list: ";
+    for (int val : userArray) {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
