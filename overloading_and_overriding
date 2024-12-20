@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Animal {
+public:
+    virtual void makeSound() {
+        cout << "Generic animal sound" << endl;
+    }
+    virtual string getDescription() const {
+        return "An animal.";
+    }
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Woof!" << endl;
+    }
+    string getDescription() const override {
+        return "A dog.";
+    }
+};
+
+int main() {
+    Animal* myAnimal = new Animal();
+    Dog* myDog = new Dog();
+    Animal* animalPointerToDog = new Dog(); 
+
+    cout << "Animal:" << endl;
+    myAnimal->makeSound();
+    cout << myAnimal->getDescription() << endl;
+
+    cout << "\nDog:" << endl;
+    myDog->makeSound();
+    cout << myDog->getDescription() << endl;
+
+    cout << "\nAnimal pointer pointing to a Dog :" << endl;
+    animalPointerToDog->makeSound();
+    cout << animalPointerToDog->getDescription() << endl; 
+
+    delete myAnimal;
+    delete myDog;
+    delete animalPointerToDog;
+
+    return 0;
+}
