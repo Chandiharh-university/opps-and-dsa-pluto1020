@@ -1,0 +1,96 @@
+#include <limits>
+#include <algorithm>
+
+using namespace std;
+
+void insertionSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void selectionSort(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            swap(arr[minIndex], arr[i]);
+        }
+    }
+}
+
+vector<int> getUserInput() {
+    int numElements;
+
+    while (true) {
+        cout << "Enter the number of elements in the list: ";
+        cin >> numElements;
+
+        if (cin.fail() || numElements <= 0) {
+            cout << "Invalid input. Please enter a positive integer." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        break;
+    }
+
+    vector<int> userList;
+    for (int i = 0; i < numElements; i++) {
+        int element;
+        while (true) {
+            cout << "Enter element " << i + 1 << ": ";
+            cin >> element;
+            if (cin.fail()) {
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+            userList.push_back(element);
+            break;
+        }
+    }
+    return userList;
+}
+
+int main() {
+    vector<int> userArray = getUserInput();
+    vector<int> arrayCopy1 = userArray;
+    vector<int> arrayCopy2 = userArray;
+
+    cout << "Unsorted list: ";
+    for (int val : userArray) {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    insertionSort(arrayCopy1);
+    cout << "Sorted list (Insertion Sort): ";
+    for (int val : arrayCopy1) {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    selectionSort(arrayCopy2);
+    cout << "Sorted list (Selection Sort): ";
+    for (int val : arrayCopy2) {
+        cout << val << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
